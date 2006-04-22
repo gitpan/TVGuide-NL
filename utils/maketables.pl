@@ -226,7 +226,7 @@ EOF
 
 # version is set to version fo main module plus timestamp of 
 # download of the data from the web
-my $version = '0.12.' . time;
+my $version = '0.13.' . time;
 print <<"EOF";
 # set the version of this module
 our \$VERSION;

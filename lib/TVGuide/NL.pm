@@ -2,7 +2,7 @@ package TVGuide::NL;
 
 # TVGids.pm - retrieve tv schedule for dutch television
 # Copyright (c) 2004-2006 by Bas Zoetekouw <bas@debian.org>
-# $Id: NL.pm 68 2006-04-22 13:08:35Z bas $
+# $Id: NL.pm 73 2006-04-22 14:37:06Z bas $
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of either the Artistic license, or
@@ -54,7 +54,7 @@ use utf8;
 
 # set the version of this module
 our $VERSION;
-$VERSION = '0.12';
+$VERSION = '0.13';
 
 # load modules we need
 use Carp;
@@ -71,7 +71,7 @@ require Encode;
 sub new;				# constuctor
 sub is_valid_station;	# check if a station name, code or abbrev is valid
 sub all_station_codes;	# returns a list of all station codes
-sub all_station_named;	# returns a list of all station names
+sub all_station_names;	# returns a list of all station names
 sub station_name;		# returns the full name of the station
 sub station_code;		# returns the Z-code of the station
 sub station_abbr;		# returns the abbreviation of the station
@@ -1190,7 +1190,7 @@ channels @s.
 sub whats_next
 {
 	my $self = shift;
-	return $self->whats_on_generic(1,@_);
+	return $self->_whats_on_generic(1,@_);
 }
 
 # first argument is 0 for current program, 1 for next program, etc
