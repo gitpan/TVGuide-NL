@@ -1,0 +1,535 @@
+------------------------------------------------------------------------
+r67 | bas | 2006-04-22 15:04:20 +0200 (za, 22 apr 2006) | 2 lines
+Changed paths:
+   M /omroep.nl/examples/tvgids.cgi
+   M /omroep.nl/examples/tvgids.css
+
+Backport from online version
+
+------------------------------------------------------------------------
+r66 | bas | 2006-04-22 14:54:23 +0200 (za, 22 apr 2006) | 2 lines
+Changed paths:
+   M /omroep.nl/examples/films.rss
+
+films.rss fixes from online version
+
+------------------------------------------------------------------------
+r65 | bas | 2006-04-22 14:50:48 +0200 (za, 22 apr 2006) | 2 lines
+Changed paths:
+   M /omroep.nl/utils/maketables.pl
+
+Fix Talpa/Nickelodeon
+
+------------------------------------------------------------------------
+r64 | bas | 2006-04-22 14:40:38 +0200 (za, 22 apr 2006) | 2 lines
+Changed paths:
+   M /omroep.nl/MANIFEST
+
+fixed manifest
+
+------------------------------------------------------------------------
+r63 | bas | 2006-04-22 14:39:29 +0200 (za, 22 apr 2006) | 2 lines
+Changed paths:
+   M /omroep.nl/examples/films.rss
+   M /omroep.nl/examples/prefs.cgi
+   M /omroep.nl/examples/tvgids.cgi
+   M /omroep.nl/lib/TVGuide/NL.pm
+
+Added/fixed copyright
+
+------------------------------------------------------------------------
+r62 | bas | 2006-04-22 14:35:08 +0200 (za, 22 apr 2006) | 2 lines
+Changed paths:
+   M /omroep.nl/MANIFEST
+   A /omroep.nl/META.yml
+
+META.yaml, MANIFEST
+
+------------------------------------------------------------------------
+r61 | bas | 2006-04-22 14:24:23 +0200 (za, 22 apr 2006) | 1 line
+Changed paths:
+   A /omroep.nl/Artistic.txt
+   A /omroep.nl/GPL2.txt
+   A /omroep.nl/LICENSE
+   A /omroep.nl/README
+
+Documentation/licensing
+------------------------------------------------------------------------
+r60 | bas | 2006-04-22 14:10:59 +0200 (za, 22 apr 2006) | 3 lines
+Changed paths:
+   A /omroep.nl/examples/test.pl
+   M /omroep.nl/lib/TVGuide/NL.pm
+
+Added a new parse_schedule funciton
+Added a test script
+
+------------------------------------------------------------------------
+r59 | bas | 2005-09-22 12:30:24 +0200 (do, 22 sep 2005) | 3 lines
+Changed paths:
+   M /omroep.nl/examples/tvgids.cgi
+
+Fixed a bug in examples/tvgids.cgi in the checking for application/xhtml+xml
+in the Accept header, and cleaned up the code a bit.
+
+------------------------------------------------------------------------
+r58 | bas | 2005-09-04 23:32:08 +0200 (zo, 04 sep 2005) | 2 lines
+Changed paths:
+   A /omroep.nl/MANIFEST
+
+added MANIFEST file
+
+------------------------------------------------------------------------
+r57 | bas | 2005-09-02 20:35:50 +0200 (vr, 02 sep 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/examples/tvgids.cgi
+   M /omroep.nl/lib/TVGuide/NL.pm
+
+Added support voor Talpa
+
+------------------------------------------------------------------------
+r56 | bas | 2005-09-02 11:55:02 +0200 (vr, 02 sep 2005) | 3 lines
+Changed paths:
+   M /omroep.nl/examples/prefs.cgi
+   M /omroep.nl/lib/TVGuide/NL.pm
+
+- added all_station_codes() and all_station_names() function to TVGuide::NL
+- ported prefs.cgi to the new object model
+
+------------------------------------------------------------------------
+r55 | bas | 2005-08-19 16:15:45 +0200 (vr, 19 aug 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/examples/films.rss
+   M /omroep.nl/examples/tvgids.cgi
+
+- fixed the example scripts to work with the updated namespace
+
+------------------------------------------------------------------------
+r54 | bas | 2005-08-19 16:15:29 +0200 (vr, 19 aug 2005) | 5 lines
+Changed paths:
+   M /omroep.nl/Makefile.PL
+   M /omroep.nl/lib/TVGuide/NL.pm
+   M /omroep.nl/utils/maketables.pl
+
+- converted names.pl to a full perl module TVGuide::NL::Names
+- added a station_abbr() and timestamp() function to the class
+- improved the docs of station_code() a but
+- fixed the makefile to automatically generate TVGuide::NL::Names
+
+------------------------------------------------------------------------
+r53 | bas | 2005-08-04 16:35:12 +0200 (do, 04 aug 2005) | 4 lines
+Changed paths:
+   A /omroep.nl/Makefile.PL
+   D /omroep.nl/TVGids.pm
+   D /omroep.nl/eerstetest.sh
+   A /omroep.nl/examples
+   A /omroep.nl/examples/films.rss (from /omroep.nl/films.rss:51)
+   A /omroep.nl/examples/pics (from /omroep.nl/pics:52)
+   A /omroep.nl/examples/prefs.cgi (from /omroep.nl/prefs.cgi:51)
+   A /omroep.nl/examples/prefs.css (from /omroep.nl/prefs.css:52)
+   A /omroep.nl/examples/prefs.js (from /omroep.nl/prefs.js:51)
+   A /omroep.nl/examples/tvgids.cgi (from /omroep.nl/tvgids.cgi:52)
+   A /omroep.nl/examples/tvgids.css (from /omroep.nl/tvgids.css:51)
+   A /omroep.nl/examples/tvgids.js (from /omroep.nl/tvgids.js:51)
+   D /omroep.nl/films.rss
+   A /omroep.nl/lib
+   A /omroep.nl/lib/TVGuide
+   A /omroep.nl/lib/TVGuide/NL.pm (from /omroep.nl/TVGids.pm:52)
+   D /omroep.nl/pics
+   D /omroep.nl/prefs.cgi
+   D /omroep.nl/prefs.css
+   D /omroep.nl/prefs.js
+   D /omroep.nl/rss.pl
+   D /omroep.nl/test.pl
+   D /omroep.nl/tvgids.cgi
+   D /omroep.nl/tvgids.css
+   D /omroep.nl/tvgids.js
+   M /omroep.nl/utils/maketables.pl
+   A /omroep.nl/zooi
+   A /omroep.nl/zooi/eerstetest.sh (from /omroep.nl/eerstetest.sh:52)
+   A /omroep.nl/zooi/test.pl (from /omroep.nl/test.pl:52)
+
+getting ready for release:
+ - moved files around
+ - changed interface to OO-style
+
+------------------------------------------------------------------------
+r52 | bas | 2005-08-02 12:08:43 +0200 (di, 02 aug 2005) | 2 lines
+Changed paths:
+   A /omroep.nl/prefs.css
+
+Added prefs.css (oops)
+
+------------------------------------------------------------------------
+r51 | bas | 2005-07-24 11:39:47 +0200 (zo, 24 jul 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/TVGids.pm
+
+Added Zomergaster movie prepension
+
+------------------------------------------------------------------------
+r50 | bas | 2005-07-22 20:26:40 +0200 (vr, 22 jul 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/TVGids.pm
+
+Added another movie prepension
+
+------------------------------------------------------------------------
+r49 | bas | 2005-07-22 16:17:20 +0200 (vr, 22 jul 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/TVGids.pm
+
+Momved start of days to 6am
+
+------------------------------------------------------------------------
+r48 | bas | 2005-07-22 16:14:54 +0200 (vr, 22 jul 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/tvgids.cgi
+
+Improved cookie detection in cgi script
+
+------------------------------------------------------------------------
+r47 | bas | 2005-07-18 20:49:19 +0200 (ma, 18 jul 2005) | 3 lines
+Changed paths:
+   M /omroep.nl/prefs.cgi
+   M /omroep.nl/prefs.js
+   M /omroep.nl/tvgids.cgi
+
+- Cookies geimplementeerd
+- Link van tvgids naar prefs gemaakt
+
+------------------------------------------------------------------------
+r46 | bas | 2005-07-18 19:21:27 +0200 (ma, 18 jul 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/prefs.js
+
+Fixed js for moving up/down
+
+------------------------------------------------------------------------
+r45 | bas | 2005-07-14 12:31:57 +0200 (do, 14 jul 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/films.rss
+
+Fixed the date format in the RSS feeds
+
+------------------------------------------------------------------------
+r44 | bas | 2005-07-14 12:26:02 +0200 (do, 14 jul 2005) | 2 lines
+Changed paths:
+   A /omroep.nl/pics
+   A /omroep.nl/pics/down.png
+   A /omroep.nl/pics/left.png
+   A /omroep.nl/pics/right.png
+   A /omroep.nl/pics/up.png
+
+Replaced unicode arrows in prefs.cgi by pics
+
+------------------------------------------------------------------------
+r43 | bas | 2005-07-14 12:22:44 +0200 (do, 14 jul 2005) | 8 lines
+Changed paths:
+   M /omroep.nl/TVGids.pm
+   A /omroep.nl/films.rss
+   M /omroep.nl/tvgids.cgi
+
+- Added Films rss feed
+- Added argument to MoviesOnToday whether or not to show movies that
+  have ended already
+- Some changes to the film prefixes cleanup thingy
+- Added Expires: header to tvgids.cgi
+- Added link to rss feed to tvgids.cgi
+
+
+------------------------------------------------------------------------
+r42 | bas | 2005-07-11 17:12:43 +0200 (ma, 11 jul 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/TVGids.pm
+
+Fixed another evil movie name prefix thingie
+
+------------------------------------------------------------------------
+r41 | bas | 2005-07-11 17:10:26 +0200 (ma, 11 jul 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/prefs.cgi
+   M /omroep.nl/prefs.js
+
+selection of tv stations now works
+
+------------------------------------------------------------------------
+r40 | bas | 2005-07-11 17:10:13 +0200 (ma, 11 jul 2005) | 3 lines
+Changed paths:
+   M /omroep.nl/TVGids.pm
+   M /omroep.nl/tvgids.cgi
+   M /omroep.nl/tvgids.css
+   M /omroep.nl/utils/maketables.pl
+
+- Added an util to create the tables with info about the available
+  stations (codes, abbreviations, names, etc)
+
+------------------------------------------------------------------------
+r39 | bas | 2005-06-26 20:52:26 +0200 (zo, 26 jun 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/TVGids.pm
+
+Another stupid film title addition
+
+------------------------------------------------------------------------
+r38 | bas | 2005-06-26 20:51:22 +0200 (zo, 26 jun 2005) | 2 lines
+Changed paths:
+   A /omroep.nl/prefs.cgi
+   A /omroep.nl/prefs.js
+   M /omroep.nl/tvgids.css
+
+Started the preferenced web page
+
+------------------------------------------------------------------------
+r37 | bas | 2005-06-26 20:50:32 +0200 (zo, 26 jun 2005) | 3 lines
+Changed paths:
+   A /omroep.nl/utils
+   A /omroep.nl/utils/maketables.pl
+
+Added a util to fetch and parse all the named, codes and abbreviations
+from the web.
+
+------------------------------------------------------------------------
+r36 | bas | 2005-06-25 20:34:54 +0200 (za, 25 jun 2005) | 1 line
+Changed paths:
+   D /omroep.nl/TVGids.pl
+   A /omroep.nl/TVGids.pm (from /omroep.nl/TVGids.pl:34)
+
+Renamed TVGids.pl to TVGids.pm
+------------------------------------------------------------------------
+r35 | bas | 2005-06-25 20:34:41 +0200 (za, 25 jun 2005) | 1 line
+Changed paths:
+   D /omroep.nl/TVGids.pm
+
+Removed TVGids.pm symlink
+------------------------------------------------------------------------
+r34 | bas | 2005-06-25 20:33:48 +0200 (za, 25 jun 2005) | 5 lines
+Changed paths:
+   M /omroep.nl/TVGids.pl
+   M /omroep.nl/tvgids.cgi
+   M /omroep.nl/tvgids.css
+   M /omroep.nl/tvgids.js
+
+- misc small bug fixed
+- added comment box in the cgi script
+- added description popup for movies
+
+
+------------------------------------------------------------------------
+r33 | bas | 2005-06-14 01:16:39 +0200 (di, 14 jun 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/tvgids.cgi
+   M /omroep.nl/tvgids.css
+
+Fixed the layout of the movie table
+
+------------------------------------------------------------------------
+r32 | bas | 2005-06-14 01:16:26 +0200 (di, 14 jun 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/TVGids.pl
+
+Fixed the movie code: now also show the movies that are currently running.
+
+------------------------------------------------------------------------
+r31 | bas | 2005-06-14 00:48:17 +0200 (di, 14 jun 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/TVGids.pl
+   M /omroep.nl/tvgids.cgi
+
+Added movie output routines
+
+------------------------------------------------------------------------
+r30 | bas | 2005-06-13 23:57:02 +0200 (ma, 13 jun 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/TVGids.pl
+
+Fixed StationName() 
+
+------------------------------------------------------------------------
+r29 | bas | 2005-06-13 23:50:13 +0200 (ma, 13 jun 2005) | 5 lines
+Changed paths:
+   M /omroep.nl/tvgids.cgi
+   M /omroep.nl/tvgids.css
+   M /omroep.nl/tvgids.js
+
+Changes to cgi scripts:
+ - moved to CGI.pm
+ - moved to xhtml 1.1
+ - fixed js code to use valid DOM code instead of innerHTML
+
+------------------------------------------------------------------------
+r28 | bas | 2005-06-13 23:43:36 +0200 (ma, 13 jun 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/TVGids.pl
+
+Added function for station validation and lookup/conversion
+
+------------------------------------------------------------------------
+r27 | bas | 2005-06-13 23:40:51 +0200 (ma, 13 jun 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/TVGids.pl
+
+Better error handling for writing cache
+
+------------------------------------------------------------------------
+r26 | bas | 2005-06-13 23:35:30 +0200 (ma, 13 jun 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/TVGids.pl
+
+fixed movie code
+
+------------------------------------------------------------------------
+r25 | bas | 2005-06-13 23:33:21 +0200 (ma, 13 jun 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/TVGids.pl
+   M /omroep.nl/test.pl
+
+Added support for movies
+
+------------------------------------------------------------------------
+r24 | bas | 2005-06-04 21:08:20 +0200 (za, 04 jun 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/TVGids.pl
+
+Fixed typo in isToday()
+
+------------------------------------------------------------------------
+r23 | bas | 2005-06-04 20:57:55 +0200 (za, 04 jun 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/tvgids.cgi
+   M /omroep.nl/tvgids.css
+   M /omroep.nl/tvgids.js
+
+Fixed displaying of descriptions om web page
+
+------------------------------------------------------------------------
+r22 | bas | 2005-05-31 18:15:59 +0200 (di, 31 mei 2005) | 3 lines
+Changed paths:
+   M /omroep.nl/tvgids.cgi
+   M /omroep.nl/tvgids.css
+   A /omroep.nl/tvgids.js
+
+cgi-script:
+ * added js code to expand the description when hovering
+
+------------------------------------------------------------------------
+r21 | bas | 2005-05-31 18:15:05 +0200 (di, 31 mei 2005) | 6 lines
+Changed paths:
+   M /omroep.nl/TVGids.pl
+
+* fixed isToday() between 12 and 5 am
+* added use encoding 'utf8'
+* fixed the description extraction
+* added a function to ocmpare two times
+* fix WhatOnToday between 12 and 5 am
+
+------------------------------------------------------------------------
+r20 | bas | 2005-05-31 17:58:18 +0200 (di, 31 mei 2005) | 3 lines
+Changed paths:
+   M /omroep.nl/tvgids.cgi
+   M /omroep.nl/tvgids.css
+
+cgi changes: 
+ * added description to output
+
+------------------------------------------------------------------------
+r19 | bas | 2005-05-31 17:57:10 +0200 (di, 31 mei 2005) | 2 lines
+Changed paths:
+   M /omroep.nl/test.pl
+
+test code changes
+
+------------------------------------------------------------------------
+r18 | bas | 2005-05-31 17:56:40 +0200 (di, 31 mei 2005) | 13 lines
+Changed paths:
+   M /omroep.nl/TVGids.pl
+
+ * fixed the exporter
+ * bbcworld --> bbcw
+ * fixed isToday on the last days of the month
+ * fixed the order of the stations in the url that we get from omroep.nl
+ * only load LWP::userAgent, HTML::TreeBuilder and Encode when we need them
+ * decode iso8859-1 from omroep.nl
+ * decode HTML entities in the station name
+ * add a field for the broadcaster to the program hash
+ * improved station code lookup (now both codes and names are recognized)
+ * add a function that returns the programs for the rest of today
+ * add a function that returns the name of the station from a code or
+   abbreviation
+
+------------------------------------------------------------------------
+r17 | bas | 2005-05-30 11:29:20 +0200 (ma, 30 mei 2005) | 2 lines
+Changed paths:
+   A /omroep.nl/tvgids.cgi
+   A /omroep.nl/tvgids.css
+
+Added cgi script
+
+------------------------------------------------------------------------
+r16 | bas | 2005-02-07 22:20:45 +0100 (ma, 07 feb 2005) | 1 line
+Changed paths:
+   M /omroep.nl/TVGids.pl
+   M /omroep.nl/test.pl
+
+Also save the session cookies in the cache
+------------------------------------------------------------------------
+r15 | bas | 2005-02-07 21:55:44 +0100 (ma, 07 feb 2005) | 1 line
+Changed paths:
+   M /omroep.nl/TVGids.pl
+
+Moved readCache() call from Update_Schedule() to Update_Schedule_10()
+------------------------------------------------------------------------
+r14 | bas | 2005-02-07 21:54:22 +0100 (ma, 07 feb 2005) | 1 line
+Changed paths:
+   M /omroep.nl/TVGids.pl
+
+Cosmetic stuff
+------------------------------------------------------------------------
+r13 | bas | 2005-02-07 21:42:22 +0100 (ma, 07 feb 2005) | 1 line
+Changed paths:
+   M /omroep.nl/TVGids.pl
+
+Added copyright
+------------------------------------------------------------------------
+r12 | bas | 2005-02-07 21:38:53 +0100 (ma, 07 feb 2005) | 1 line
+Changed paths:
+   M /omroep.nl/TVGids.pl
+
+Added nice module stuff
+------------------------------------------------------------------------
+r11 | bas | 2005-02-07 21:38:29 +0100 (ma, 07 feb 2005) | 1 line
+Changed paths:
+   M /omroep.nl/TVGids.pl
+
+Fixed a bug in the stations verification
+------------------------------------------------------------------------
+r10 | bas | 2005-02-07 21:37:58 +0100 (ma, 07 feb 2005) | 1 line
+Changed paths:
+   M /omroep.nl/TVGids.pl
+
+Added caching to disk
+------------------------------------------------------------------------
+r9 | bas | 2005-02-07 21:36:56 +0100 (ma, 07 feb 2005) | 1 line
+Changed paths:
+   M /omroep.nl/TVGids.pl
+
+Moved vim status thingy to the bottom
+------------------------------------------------------------------------
+r1 | bas | 2004-12-23 21:20:04 +0100 (do, 23 dec 2004) | 2 lines
+Changed paths:
+   A /goldstar.gif
+   A /greystar.gif
+   A /omroep.nl
+   A /omroep.nl/TVGids.pl
+   A /omroep.nl/TVGids.pm
+   A /omroep.nl/eerstetest.sh
+   A /omroep.nl/rss.pl
+   A /omroep.nl/test.pl
+   A /other
+   A /other/tv_grab_nl
+   A /postit.php
+   A /tvgids.css
+   A /tvgids.php
+
+Initial tvgids import
+
+------------------------------------------------------------------------
