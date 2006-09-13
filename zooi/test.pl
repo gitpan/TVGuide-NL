@@ -5,15 +5,17 @@ use strict;
 use Data::Dumper;
 use Time::HiRes qw( gettimeofday tv_interval );
 
-use TVGids;
+use lib '../blib/lib/';
+
+use TVGuide::NL;
 
 my $now;
+my $g = TVGuide::NL->new;
 
-TVGids::Update_Movies();
-
-print Dumper(%TVGids::TodaysSchedule);
-
-__END__
+#TVGids::Update_Movies();
+#
+#print Dumper(%TVGids::TodaysSchedule);
+#
 ## $now = [ gettimeofday ];
 ## TVGids::Update_Schedule("ard");
 ## printf "1 stations: %.2fs\n", tv_interval($now);
@@ -45,19 +47,22 @@ __END__
 ## 
 ## print"\n";
 
-foreach my $line (TVGids::WhatsOn("ned1","ned2","ned3", "bbc1"))
+foreach my $line ($g->whats_on("ned1","ned2","ned3", "bbc1"))
 {
 	print $line."\n";
 }
 print "\n";
-foreach my $line (TVGids::WhatsNext("ned1","ned2","ned3", "bbc1"))
+foreach my $line ($g->whats_next("ned1","ned2","ned3", "bbc1"))
 {
 	print $line."\n";
 }
 
-print TVGids::WhatsOn('disc'), "\n";
-print TVGids::WhatsNext('disc'), "\n";
-print TVGids::WhatsNext('rtl4'), "\n";
+print $g->whats_on('disc'), "\n";
+print $g->whats_next('disc'), "\n";
+
+print "\n";
+
+#print Dumper($g->whats_on_today('rtl4')), "\n";
 
 
 #print Dumper $TVGids::TodaysSchedule{Z1}->{schedule};

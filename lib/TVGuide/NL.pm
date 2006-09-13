@@ -2,7 +2,7 @@ package TVGuide::NL;
 
 # TVGids.pm - retrieve tv schedule for dutch television
 # Copyright (c) 2004-2006 by Bas Zoetekouw <bas@debian.org>
-# $Id: NL.pm 73 2006-04-22 14:37:06Z bas $
+# $Id: NL.pm 83 2006-09-13 14:10:23Z bas $
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of either the Artistic license, or
@@ -54,7 +54,7 @@ use utf8;
 
 # set the version of this module
 our $VERSION;
-$VERSION = '0.13';
+$VERSION = '0.14';
 
 # load modules we need
 use Carp;
@@ -145,7 +145,7 @@ BEGIN
 END   { }
 
 
-=item $g = TVguide::NL->new( %options );
+=item $g = TVGuide::NL->new( %options );
 
 This is the constructor of the TVGuide::NL object.
 
@@ -293,8 +293,8 @@ sub __comp_times
 	my ($hour1,$min1) = split ':', $time1, 2;
 	my ($hour2,$min2) = split ':', $time2, 2;
 
-	$hour1+=24 if ($hour1<5);
-	$hour2+=24 if ($hour2<5);
+	$hour1+=24 if ($hour1<6);
+	$hour2+=24 if ($hour2<6);
 	
 	return -1 if ($hour1<$hour2 or $hour1==$hour2 and $min1<$min2);
 	return 0  if ($hour1==$hour2 and $min1==$min2);
@@ -716,97 +716,6 @@ sub _parse_schedule
 
 	return 1;
 }
-# parse the content of a gids.omroep.nl/core/content.php page 
-sub _parse_schedule_new
-{
-	my $self = shift;
-	my $content = shift;
-
-	# now parse the html file
-	my $htmltree = HTML::TreeBuilder->new();
-	$htmltree->parse($content);
-	$htmltree->eof;
-
-	# find the currently displayed stations
-	my %stations;
-	my $subtree;
-
-	# first find the table containing the stations
-	$subtree = $htmltree->look_down(
-			'_tag' => 'table', 
-			'summary' => 'Zenderoverzicht'
-	);
-	unless ($subtree){
-		carp 'Oops, no `Zenderoverzicht\' table found';
-		return undef;
-	}
-
-	# use the name attributes in the input tags
-	foreach ( $subtree->look_down(
-				'_tag' => 'input',
-				sub { $_[0]->attr('name') =~ m/^Z/ and $_[0]->attr('checked') } 
-	))
-	{
-		my $code = $_->attr('name');
-		my $name = $_->parent->left->content->[0];
-		$stations{$code} = decode_entities( $name );
-	}
-
-	# now parse the schedule
-
-	# the programs will be put into this array.  
-	# Index is the number of the column in the html file
-	my @programs;
-	for (my $i=0; $i<scalar(keys(%stations)); $i++)
-	{
-		$programs[$i] = [];
-	}
-		
-	# find the table containing the schedule
-	$subtree = $htmltree->look_down(
-			'_tag' => 'table', 
-			'summary' => 'Programmaoverzicht'
-	);
-	foreach my $foo ( $subtree->look_down('_tag','td', 'class','pt')) 
-	{
-		my $time  = $foo->as_text;
-		
-		my $cell  = $foo->right;
-		my $title = $cell->find('b')->as_text;
-		my $desc  = $cell->find('a')->as_text;
-		my $info  = $cell->content->[0]->attr('href');
-
-		# ugly hack to correct s///'s behaviour with use encoding;
-		substr($desc,0,length $title)='' if (0 == index $desc,$title);
-
-		# this is the number of the column this particular cell is in
-		# (i.e. the index of the station)
-		my $stationidx = ($foo->parent->parent->parent->pindex) -1;
-
-		my $omroep = '';
-		$omroep = $1 if ($desc =~ s/^\((.*?)\)\s?//);
-		
-		push @{$programs[$stationidx]}, {
-			'time'		=>	$time, 
-			'title'		=>	$title, 
-			'desc'		=>	$desc, 
-			'info'		=>	$info, 
-			'omroep'	=>	$omroep
-		};
-	}
-
-	# now put the info we found into the schedule
-	my $stationidx = -1;
-	foreach my $station ($self->_sort_stations(keys %stations))
-	{
-		$stationidx++;
-		$self->{schedule}->{today}->{$station}->{timestamp} = time();
-		$self->{schedule}->{today}->{$station}->{schedule} = 
-			[ @{$programs[$stationidx]} ];
-	}
-
-	return 1;
-}
 
 # parse the content of 
 # http://gids.omroep.nl/core/content.php?guide=Filmgids&medium=TV
@@ -912,101 +821,6 @@ sub _parse_movies
 
 	return 1;
 }
-
-# get the programs of talpa
-sub _update_talpa
-{
-	my $self = shift;
-
-	# initialize HTTP client funtion
-	my $ua = LWP::UserAgent->new;
-	$ua->agent($HTTP_USERAGENT);
-	$ua->timeout($HTTP_TIMEOUT);
-	$ua->env_proxy;
-
-	# GET content
-	my $url = 'http://www.talpa.tv/static/project/talpa/cfg/Gids.cfg';
-	my $response = $ua->get($url, %HTTP_HEADERS);
-	unless ($response->is_success) { 
-		$self->_debug("Error while retrieving url $url: ",
-				$response->status_line);
-		return undef;
-	}
-
-	my $content = Encode::decode('utf-8', $response->content);
-
-	# now parse the html file
-	my $p = HTML::TokeParser->new( \$content );
-	unless ($p)
-	{
-		$self->_debug("Couldn't parse the Talpa schedule");
-		return undef;
-	}
-
-	# now parse the schedule
-	# the programs will be put into this array.  
-	my @programs = ();
-	
-	# find programming table
-	while ( my $token = $p->get_tag('event') )
-	{
-		# parse the date/time
-		my ($year,$month,$day, $time) = 
-			$token->[1]{starttime} =~ m/^(\d{4})-(\d\d)-(\d\d)T(\d\d:\d\d)/;
-
-		# we're only interested in today's programs
-		my $timestamp = timegm_nocheck(0,0,16, $day,$month-1,$year);
-		next unless (__is_today($timestamp)==0);
-
-		# get the rest of the info
-		my $duration = $token->[1]{duration};
-		$token = $p->get_tag('name');
-		my $title = $p->get_trimmed_text('/name');
-		$token = $p->get_tag('description');
-		my $desc = $p->get_trimmed_text('/description');
-		$token = $p->get_tag('url');
-		my $link = $p->get_trimmed_text('/url');
-
-		push @programs, {
-			'time'		=>	$time, 
-			'title'		=>	$title, 
-			'desc'		=>	$desc, 
-			'info'		=>	$link, 
-			'omroep'	=>	'',
-		};
-	}
-
-	# now insert the programs into the Nickelodeon schedule
-	return undef unless (exists $self->{schedule}->{today}->{Z68});
-	my $sched = $self->{schedule}->{today}->{Z68}->{schedule};
-
-	# find the TALPA entry in the nickelodeon
-	my $talpa=0;
-	while (exists($sched->[$talpa]))
-	{
-		last if ($sched->[$talpa]->{title} =~ m/^talpa/i);
-		$talpa++;
-	}
-	return undef unless exists($sched->[$talpa]);
-
-	# move all the other Nickelodeon entries forward
-	my $num_talpa = scalar @programs;
-	my $num_nick = scalar @{$sched};
-	my $j = 0;
-	for (my $i=$num_nick-1; $i>$talpa; $i--)
-	{
-		$sched->[$i+$num_talpa-1] = $sched->[$i];
-		$sched->[$i] = 'talpa';
-	}
-	# and put the Talpa programs in there
-	for (my $i=0; $i<$num_talpa; $i++)
-	{
-		$sched->[$talpa+$i] = $programs[$i];
-	}
-
-	return 1;
-}
-
 
 =item $g->update_schedule( @s );
 
@@ -1156,12 +970,6 @@ sub _update_schedule_10
 		return undef;
 	}
 
-	# check if we need to do talpa update
-	foreach my $zender (@codes)
-	{
-		$self->_update_talpa if ($zender eq 'Z68');
-	}
-
 	return 1;
 }
 
@@ -1201,7 +1009,9 @@ sub _whats_on_generic
 	my $number = shift;
 	my @stations = @_;
 
-	my @now = localtime();
+	# hours and minutes
+	my @now = (localtime())[2,1];
+	if ($now[0]<6) { $now[0]+=24 }; # fix times after 0am
 
 	# check if the stations are valid
 	for my $i (0..$#stations)
@@ -1228,8 +1038,10 @@ sub _whats_on_generic
 		{
 			my $program = $self->{schedule}->{today}->{$code}->{schedule}->[$i];
 			my @time = split ':', $program->{time}, 2;
-			next if ( $time[0]<$now[2] or 
-			          $time[0]==$now[2] and $time[1]<$now[1] );
+			if ($time[0]<6) { $time[0]+=24 }; # fix times after 0am
+
+			next if ( $time[0]<$now[0] or
+				$time[0]==$now[0] and $time[1]<$now[1] );
 			last;
 		}
 		# decrease by 1, because we want the current program 

@@ -58,17 +58,21 @@ $content =~ m{<table\s[^>]+summary="Zenderoverzicht".*?</table>}s
 	or die("Couldn't find table `Zenderoverzicht'");
 my $zendertable = $&;
 
+#print $zendertable, "\n";
+
 my @zenders = ();
 while ($zendertable =~ m{<tr>.*?</tr>}sgc)
 {
 	my $row = $&;
-	next unless ($row =~ m{<td>([^<]+)</td>.*?<input [^>]*name="(Z\d+)"});
+	next unless ($row =~ m{<td\s?[^>]*>([^<]+)</td>.*?<input [^>]*name="(Z\d+)"});
 	#print $row,"\n";
 	my $name = decode_entities($1);
 	my $code = $2;
 	
 	push @zenders, { 'code' => $code, 'naam' => $name };
 }
+
+die("no stations found!") unless @zenders;
 
 ########################################################################
 ## finally, find all stations and their logo/code
@@ -104,6 +108,8 @@ for (my $i=0; $i<=int($#zenders/10); $i++)
 	# find the logo's section
 	$content =~ m{<div\s[^>]*id="logosDiv".*?</div>}s;
 	my $logos = $&;
+
+	#print $logos, "\n";
 
 	my $j = 10*$i;
 	while ($logos =~ m{<img src="/Z/(tv-[^.]+).gif"}sgc)
@@ -226,7 +232,7 @@ EOF
 
 # version is set to version fo main module plus timestamp of 
 # download of the data from the web
-my $version = '0.13.' . time;
+my $version = '0.14.' . time;
 print <<"EOF";
 # set the version of this module
 our \$VERSION;
